@@ -1,101 +1,33 @@
+#include <boost/algorithm/string.hpp>
 #include <climits>
+#include <exception>
 #include <fstream>
 #include <iostream>
+#include <map>
 #include <memory>
 #include <sstream>
 #include <string>
 #include <utility>
 
+#include "csv_parser.hh"
 #include "graph.hh"
 #include "log.hh"
+#include "utils.hh"
 
-using json = nlohmann::json;
-
-static json stream_to_json(const std::string& filename)
+static float getTypeId(std::string& type)
 {
-    std::ifstream s(filename);
-
-    json j;
-    try
-    {
-        s >> j;
-    } catch (std::exception& e)
-    {
-        Log l(__FUNCTION__, true);
-        l << "Error Parsing Json: cannot load " << filename << "\n";
-    }
-    s.close();
-
-    return j;
+    if (!type.compare("metros"))
+        return 0;
+    if (!type.compare("rers"))
+        return 1;
+    if (!type.compare("tramways"))
+        return 2;
+    if (!type.compare("bus"))
+        return 3;
+    return 0;
 }
 
-/*
-std::shared_ptr<Station> get_station(station_vect v, const std::string& slug)
-{
-    for (auto s : v)
-        if (!slug.compare(s->get_slug()))
-            return s;
-    return NULL;
-}
-
-static void fill_adj_station(station_vect v, std::shared_ptr<Station> s, json l,
-                             const std::string& line_code, size_t i)
-{
-    std::cout << "station " << i << l.size() << l[i]["slug"] << "\n";
-    std::string slug = l[i]["slug"];
-
-    std::shared_ptr<Station> s1, s2;
-    if (i < l.size() - 1)
-    {
-        log << "	avant " << i << l.size() << l[i + 1]["slug"] << "\n";
-        s1 = get_station(v, l[i + 1]["slug"]);
-        adjacency_station adj1 = std::make_pair(
-            line_code, std::make_pair(s1, std::make_pair(0, 60)));
-        s->add_adj(adj1);
-    }
-
-    if (i > 0)
-    {
-        log << "	apres " << i << l.size() << l[i - 1]["slug"] << "\n";
-        s2 = get_station(v, l[i - 1]["slug"]);
-        adjacency_station adj2 = std::make_pair(
-            line_code, std::make_pair(s2, std::make_pair(0, 60)));
-        s->add_adj(adj2);
-    }
-}
-
-static void update_adj_lists(std::shared_ptr<Graph> g, const std::string& type)
-{
-    for (auto l : g->lines_["result"][type])
-    {
-        std::stringstream line_path;
-        std::string code(l["code"]);
-        code.erase(remove(code.begin(), code.end(), '\"'), code.end());
-        line_path << "data/stations/" << type << "/" << code << ".json";
-        json line = stream_to_json(line_path.str());
-        l = line["result"]["stations"];
-        for (size_t i = 0; i < l.size(); i++)
-        {
-            auto station = get_station(g->stations_data, l[i]["slug"]);
-            std::stringstream line_id;
-            line_id << type << code;
-            if (!station)
-                std::cerr << "error no station named " << l[i]["slug"] << "\n";
-            else
-                fill_adj_station(g->stations_data, station, l, line_id.str(),
-i);
-        }
-    }
-}*/
-
-/*
-static void update_id(std::shared_ptr<Graph> g)
-{
-    for (size_t i = 0; i < v.size(); i++)
-        v[i]->set_id(i);
-}*/
-
-static float getLineDuration(std::string& type)
+static float getTypeDuration(std::string& type)
 {
     if (!type.compare("metros"))
         return 1.5;
@@ -132,13 +64,46 @@ static std::string& getLineColor(std::string& type, std::string& code)
     return lines_color[s.str()];
 }
 
+void Graph::addStationsPosition()
+{
+    Log l(__FUNCTION__);
+    CSVParser csv_parser("data/stations_position.csv", ";");
+    CSV stations_position = csv_parser.getData();
+
+    // std::cout << stations_position[i][0] << "/" <<
+    // stations_position[i][7]
+    //          << "/" << stations_position[i][9] << "\n";
+
+    size_t n = 0;
+    for (size_t i = 0; i < stations_position.size(); i++)
+    {
+        for (size_t j = 0; j < stations_data.size(); j++)
+        {
+            std::string s1 = boost::to_lower_copy(stations_position[i][6]);
+            std::string s2 = boost::to_lower_copy(stations_data[j].name);
+            if (!s1.compare(s2) && !stations_data[j].position.latitude)
+            {
+                std::vector<std::string> pos_string;
+                boost::algorithm::split(pos_string, stations_position[i][0],
+                                        boost::is_any_of(","));
+                stations_data[j].position = {std::stof(pos_string[0]),
+                                             std::stof(pos_string[1])};
+                n++;
+            }
+        }
+    }
+
+    l << "Add position for " << n << "/" << order_ << " stations.\n";
+}
+
 int Graph::addLine(std::string type, std::string code, std::string color)
 {
     lines_data.push_back({type, code, color});
     return lines_data.size() - 1;
 }
 
-int Graph::addStation(std::string name, float population, float employment)
+int Graph::addStation(std::string name, float population, float employment,
+                      Pos position)
 {
     auto v = stations_data;
     auto it = std::find_if(v.begin(), v.end(), [&name](const StationData& s) {
@@ -147,74 +112,89 @@ int Graph::addStation(std::string name, float population, float employment)
 
     if (it != v.end())
     {
-        Log l(__FUNCTION__, true);
-        l << "La station " << name << " est deja presente dans stations_data\n";
+        // Log l(__FUNCTION__, true);
+        // l << "La station " << name << " est deja presente dans
+        // stations_data\n";
         return std::distance(v.begin(), it);
     } else
     {
         int index = stations_data.size();
-        stations_data.push_back({name, population, employment});
+        stations_data.push_back({name, population, employment, position});
         return index;
     }
 }
 
-void Graph::initStations(json lines_json, std::string type)
+void Graph::initStations(CSV lines_csv, std::string type)
 {
-    for (auto l : lines_json["result"][type])
+    for (std::string code : lines_csv[getTypeId(type)])
     {
+        code = removeQuote(code);
+
         std::stringstream line_path;
-        std::string code(l["code"]);
-        code.erase(remove(code.begin(), code.end(), '\"'), code.end());
-        line_path << "data/stations/" << type << "/" << code << ".json";
-        json line = stream_to_json(line_path.str());
+        line_path << "data/stations/" << type << "/" << code << ".csv";
+        CSVParser csv_parser(line_path.str());
+        CSV stations = csv_parser.getData();
 
         // Check if Json File is OK
-        if (line.size() > 0)
+        if (stations.size() > 0)
         {
-            auto stations = line["result"]["stations"];
             int line_id = addLine(type, code, getLineColor(type, code));
 
-            int src_id = addStation(stations[0]["name"], 5, 5);
+            std::string src_name = removeQuote(stations[0][0]);
+            int src_id = addStation(src_name, 5, 5, {0, 0});
+
             for (size_t i = 0; i < stations.size() - 1; i++)
             {
-                int dst_id = addStation(stations[i + 1]["name"], 5, 5);
-                addEdgePair(src_id, dst_id, line_id, getLineDuration(type), 0);
+                std::string dst_name = removeQuote(stations[i + 1][0]);
+                int dst_id = addStation(dst_name, 5, 5, {0, 0});
+                addEdgePair(src_id, dst_id, line_id, getTypeDuration(type), 0);
                 src_id = dst_id;
             }
+        } else
+        {
+            Log l2(__FUNCTION__, true);
+            l2 << "Cannot find " << line_path.str() << "\n";
         }
     }
 }
 
 void Graph::correctFailure()
 {
+    Log l(__FUNCTION__);
+    l << "Magenta --> Gare du Nord\n";
     addEdgePair(getStationId("Magenta"), getStationId("Gare du Nord"), 0, 5, 0);
-    // addEdgePair(getStationId("Anvers"), getStationId("Funiculaire Gare
-    // basse"),
-    //            0, 5, 0);
+    addEdgePair(getStationId("Anvers"), getStationId("Funiculaire Gare basse"),
+                0, 5, 0);
+    addEdgePair(getStationId("Villejuif - Louis Aragon"),
+                getStationId("Villejuif-Louis Aragon"), 0, 1.5, 0);
+    addEdgePair(getStationId("Gare de Bondy"), getStationId("Bondy"), 0, 2, 0);
 }
 
-Graph::Graph(std::string folder_path)
+Graph::Graph()
 {
-    Log l("Graph");
+    Log l(__FUNCTION__);
+    l << "Generating Graph from data/..\n";
     order_ = 0;
-    std::stringstream lines_json_path;
-    lines_json_path << folder_path << "/lines.json";
-    json lines_json = stream_to_json(lines_json_path.str());
+    CSVParser csv_parser("data/lines.csv");
+    CSV lines_csv = csv_parser.getData();
+
+    if (!lines_csv.size())
+    {
+        Log l2(__FUNCTION__, true);
+        l2 << "Cannot find lines.csv\n";
+        throw;
+    }
 
     l << "Import metros stations\n";
-    initStations(lines_json, "metros");
+    initStations(lines_csv, "metros");
     l << "Import rers stations\n";
-    initStations(lines_json, "rers");
-    // l << "Import rers tramways\n";
-    // initStations(lines_json, "tramways");
-    // l << "Import rers stations\n";
-    // initStations(lines_json, "tramways");
+    initStations(lines_csv, "rers");
+    l << "Import tramways stations\n";
+    initStations(lines_csv, "tramways");
+    // l << "Import bus stations\n";
+    // initStations(lines_csv, "bus");
 
-    // update_adj_lists(g, "metros");
-    // update_adj_lists(g, "rers");
-    // update_adj_lists(g, "tramways");
-    // update_adj_lists(g, "bus");
+    addStationsPosition();
 
-    // update_id(g->stations_data);
     correctFailure();
 }

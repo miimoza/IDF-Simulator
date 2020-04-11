@@ -48,10 +48,11 @@ void Graph::browsePath(std::vector<std::pair<int, int>> best_parent, int src_id,
 void Graph::dijkstraDistribution()
 {
     Log l(__FUNCTION__);
+    l << "Distrbute from each stations...\n";
     for (int i = 0; i < order_; i++)
     {
-        l << "Distribute from " << stations_data[i].name << "(" << i << "/"
-          << order_ << ")\n";
+        l << "(" << i + 1 << "/" << order_ << ") Distribute from "
+          << stations_data[i].name << "\n";
         distributeFrom(i);
     }
 }

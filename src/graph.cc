@@ -4,19 +4,6 @@
 
 #include "log.hh"
 
-Graph::Graph()
-{
-    order_ = 0;
-}
-
-Graph::Graph(std::vector<Edge> const& edges, int order)
-    : order_(order)
-{
-    adj_list.resize(order);
-    for (auto& edge : edges)
-        adj_list[edge.src_id].push_back(edge);
-}
-
 void Graph::addEdgePair(int src_id, int dst_id, int line_id, float duration,
                         float traffic)
 {
@@ -67,7 +54,9 @@ void Graph::dump()
     {
         std::cout << i << ":" << stations_data[i].name
                   << "|p:" << stations_data[i].population
-                  << "|e:" << stations_data[i].employment << "{";
+                  << "|e:" << stations_data[i].employment << "|pos("
+                  << stations_data[i].position.latitude << ","
+                  << stations_data[i].position.longitude << "){";
 
         for (Edge e : adj_list[i])
             std::cout << "(" << e.src_id << "->" << e.dst_id
@@ -80,4 +69,29 @@ void Graph::dump()
     std::cout << "order_:" << order_
               << ", stations_data.size():" << stations_data.size()
               << ", lines_data.size():" << lines_data.size() << "\n";
+}
+
+std::ostream& operator<<(std::ostream& os, const Graph& G)
+{
+    for (int i = 0; i < G.order_; i++)
+    {
+        os << i << ":" << G.stations_data[i].name
+           << "|p:" << G.stations_data[i].population
+           << "|e:" << G.stations_data[i].employment << "|pos("
+           << G.stations_data[i].position.latitude << ","
+           << G.stations_data[i].position.longitude << "){";
+
+        for (Edge e : G.adj_list[i])
+            os << "(" << e.src_id << "->" << e.dst_id << "/l:" << e.line_id
+               << "[" << G.lines_data[e.line_id].type << ","
+               << G.lines_data[e.line_id].code << ","
+               << G.lines_data[e.line_id].color << "]"
+               << ",d:" << e.duration << ",t:" << e.traffic << ")";
+        os << "}" << std::endl;
+    }
+    os << "order_:" << G.order_
+       << ", stations_data.size():" << G.stations_data.size()
+       << ", lines_data.size():" << G.lines_data.size() << "\n";
+
+    return os;
 }

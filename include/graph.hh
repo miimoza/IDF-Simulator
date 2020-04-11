@@ -1,18 +1,25 @@
+#pragma once
+
 #include <string>
 #include <vector>
-
-#include "json.hpp"
 
 #define TOTAL_POPULATION 1265
 #define TOTAL_EMPLOYMENT 1265
 
-using json = nlohmann::json;
+using CSV = std::vector<std::vector<std::string>>;
+
+struct Pos
+{
+    float latitude;
+    float longitude;
+};
 
 struct StationData
 {
     std::string name;
     float population;
     float employment;
+    Pos position;
 };
 
 struct LineData
@@ -41,12 +48,12 @@ public:
     std::vector<LineData> lines_data;
 
     // GRAPH CREATION
-    Graph(std::vector<Edge> const& edges, int order);
     Graph();
-    Graph(std::string folder_path);
-    void initStations(json lines_json, std::string type);
-    int addStation(std::string name, float population, float employment);
+    void initStations(CSV lines_csv, std::string type);
+    int addStation(std::string name, float population, float employment,
+                   Pos position);
     int addLine(std::string type, std::string code, std::string color);
+    void addStationsPosition();
     void correctFailure();
 
     // CASUAL OPERATIONS
@@ -67,6 +74,9 @@ public:
 
     // GRAPHVIZ GENERATION
     void generateDot(std::string filename);
+
+    // DEBUG
+    friend std::ostream& operator<<(std::ostream& os, const Graph& G);
 
 private:
     int order_;

@@ -10,7 +10,9 @@ void Graph::generateDot(std::string filename)
 
     std::ofstream os;
     os.open(filename);
-    os << "digraph AST {ranksep=2;nodesep=2;\n";
+    os << "digraph AST {\n";
+    os << "ratio=1; ranksep=2; nodesep=2; pin=true;\n";
+    os << "node [shape=box,style=\"filled\"]\n";
 
     for (int i = 0; i < order_; i++)
     {
@@ -20,19 +22,24 @@ void Graph::generateDot(std::string filename)
         else
             node_color = "white";
 
-        os << i << " [shape=box,style=\"filled\",pos=\"2,3\",fillcolor=\""
-           << node_color << "\",label=<<B>" << stations_data[i].name
-           << "\n(pop:" << stations_data[i].population
-           << ", emp:" << stations_data[i].employment << ")</B>>];\n";
+        os << i << " [fillcolor=\"" << node_color << "\", label=<<B>"
+           << stations_data[i].name << "\n(pop:" << stations_data[i].population
+           << ", emp:" << stations_data[i].employment << ", pos{"
+           << stations_data[i].position.latitude << ","
+           << stations_data[i].position.longitude << "})</B>>];\n";
+    }
 
+    for (int i = 0; i < order_; i++)
+    {
         for (Edge edge : adj_list[i])
         {
             std::string edge_color = lines_data[edge.line_id].color;
-            os << i << "->" << edge.dst_id << "[penwidth=" << edge.traffic / 5
+            os << i << "->" << edge.dst_id << "[penwidth=" << edge.traffic / 20
                << ",color=\"" << edge_color << "\", label=\""
                << "d:" << edge.duration << " t:" << edge.traffic << "\"];\n";
         }
     }
 
     os << "}";
+    os.close();
 }
