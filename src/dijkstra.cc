@@ -1,12 +1,12 @@
 #include <algorithm>
 #include <iostream>
 #include <limits>
-#include <map>
 #include <set>
 #include <utility>
 #include <vector>
 
 #include "graph.hh"
+#include "log.hh"
 
 void Graph::browsePath(std::vector<std::pair<int, int>> best_parent, int src_id,
                        int dst_id, int i)
@@ -18,8 +18,8 @@ void Graph::browsePath(std::vector<std::pair<int, int>> best_parent, int src_id,
     std::vector<Edge> v = adj_list[best_parent[i].first];
     int dst = i;
     int line = best_parent[i].second;
-    auto it = std::find_if(v.begin(), v.end(), [dst, line](const Edge& obj) {
-        return obj.dst_id == dst && obj.line_id == line;
+    auto it = std::find_if(v.begin(), v.end(), [dst, line](const Edge& e) {
+        return e.dst_id == dst && e.line_id == line;
     });
 
     if (it != v.end())
@@ -28,28 +28,35 @@ void Graph::browsePath(std::vector<std::pair<int, int>> best_parent, int src_id,
         float traffic;
         if (Graph::HPM)
         {
-            traffic = station_list[src_id].population
-                * (station_list[dst_id].employment / TOTAL_EMPLOYMENT);
+            traffic = stations_data[src_id].population
+                * (stations_data[dst_id].employment / TOTAL_EMPLOYMENT);
         } else
         {
-            traffic = station_list[src_id].employment
-                * (station_list[dst_id].population / TOTAL_POPULATION);
+            traffic = stations_data[src_id].employment
+                * (stations_data[dst_id].population / TOTAL_POPULATION);
         }
 
         adj_list[best_parent[i].first][index].traffic += traffic;
     } else
     {
-        std::cerr << "Can't find the edge\n";
+        Log l(__FUNCTION__, true);
+        l << "Can't find the edge (dst:" << stations_data[dst].name << "/"
+          << lines_data[line].type << lines_data[line].code << ")\n";
     }
 }
 
 void Graph::dijkstraDistribution()
 {
+    Log l(__FUNCTION__);
     for (int i = 0; i < order_; i++)
-        distribute_from(i);
+    {
+        l << "Distribute from " << stations_data[i].name << "(" << i << "/"
+          << order_ << ")\n";
+        distributeFrom(i);
+    }
 }
 
-void Graph::distribute_from(int src_id)
+void Graph::distributeFrom(int src_id)
 {
     std::set<std::pair<int, int>> setds;
     std::vector<int> dist(order_, std::numeric_limits<int>::max());
