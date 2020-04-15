@@ -54,6 +54,8 @@ public:
                    Pos position);
     int addLine(std::string type, std::string code, std::string color);
     void addStationsPosition();
+    void addStationsPopulation();
+    void addStationsEmployment();
     void correctFailure();
 
     // CASUAL OPERATIONS
@@ -61,6 +63,8 @@ public:
                      float traffic);
     void addEdge(int src_id, int dst_id, int line_id, float duration,
                  float traffic);
+    void removeEdgePair(int src_id, int dst_id, int line_id);
+    void removeEdge(int src_id, int dst_id, int line_id);
     int getStationId(std::string name);
     int getLineId(std::string type, std::string code);
     int getOrder();

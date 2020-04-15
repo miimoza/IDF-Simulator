@@ -1,5 +1,6 @@
 #include "graph.hh"
 
+#include <algorithm>
 #include <iostream>
 
 #include "log.hh"
@@ -9,6 +10,23 @@ void Graph::addEdgePair(int src_id, int dst_id, int line_id, float duration,
 {
     addEdge(src_id, dst_id, line_id, duration, traffic);
     addEdge(dst_id, src_id, line_id, duration, traffic);
+}
+
+void Graph::removeEdgePair(int src_id, int dst_id, int line_id)
+{
+    removeEdge(src_id, dst_id, line_id);
+    removeEdge(dst_id, src_id, line_id);
+}
+
+void Graph::removeEdge(int src_id, int dst_id, int line_id)
+{
+    auto cond = [&dst_id, &line_id](const Edge& e) {
+        return e.dst_id == dst_id && e.line_id == line_id;
+    };
+
+    adj_list[src_id].erase(
+        std::remove_if(adj_list[src_id].begin(), adj_list[src_id].end(), cond),
+        adj_list[src_id].end());
 }
 
 void Graph::addEdge(int src_id, int dst_id, int line_id, float duration,
@@ -31,6 +49,8 @@ int Graph::getStationId(std::string name)
     for (int i = 0; i < order_; i++)
         if (!name.compare(stations_data[i].name))
             return i;
+    Log l(__FUNCTION__, true);
+    l << "Can't find station " << name << "\n";
     return -1;
 }
 

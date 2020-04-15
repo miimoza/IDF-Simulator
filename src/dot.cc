@@ -34,8 +34,8 @@ void Graph::generateDot(std::string filename)
         for (Edge edge : adj_list[i])
         {
             std::string edge_color = lines_data[edge.line_id].color;
-            os << i << "->" << edge.dst_id << "[penwidth=" << edge.traffic / 20
-               << ",color=\"" << edge_color << "\", label=\""
+            os << i << "->" << edge.dst_id << "[penwidth=" << 3 << ",color=\""
+               << edge_color << "\", label=\""
                << "d:" << edge.duration << " t:" << edge.traffic << "\"];\n";
         }
     }

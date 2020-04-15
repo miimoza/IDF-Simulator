@@ -51,8 +51,8 @@ void Graph::dijkstraDistribution()
     l << "Distrbute from each stations...\n";
     for (int i = 0; i < order_; i++)
     {
-        l << "(" << i + 1 << "/" << order_ << ") Distribute from "
-          << stations_data[i].name << "\n";
+        // l << "(" << i + 1 << "/" << order_ << ") Distribute from "
+        //<< stations_data[i].name << "\n";
         distributeFrom(i);
     }
 }

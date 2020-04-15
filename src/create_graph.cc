@@ -1,11 +1,15 @@
+#include <array>
 #include <boost/algorithm/string.hpp>
 #include <climits>
+#include <cstdio>
+#include <curl/curl.h>
 #include <exception>
 #include <fstream>
 #include <iostream>
 #include <map>
 #include <memory>
 #include <sstream>
+#include <stdexcept>
 #include <string>
 #include <utility>
 
@@ -13,6 +17,22 @@
 #include "graph.hh"
 #include "log.hh"
 #include "utils.hh"
+
+static std::string bash_exec(const char* cmd)
+{
+    std::array<char, 128> buffer;
+    std::string result;
+    std::unique_ptr<FILE, decltype(&pclose)> pipe(popen(cmd, "r"), pclose);
+    if (!pipe)
+    {
+        throw std::runtime_error("popen() failed!");
+    }
+    while (fgets(buffer.data(), buffer.size(), pipe.get()) != nullptr)
+    {
+        result += buffer.data();
+    }
+    return result;
+}
 
 static float getTypeId(std::string& type)
 {
@@ -27,7 +47,7 @@ static float getTypeId(std::string& type)
     return 0;
 }
 
-static float getTypeDuration(std::string& type)
+static float getTypeDuration(std::string type)
 {
     if (!type.compare("metros"))
         return 1.5;
@@ -62,6 +82,54 @@ static std::string& getLineColor(std::string& type, std::string& code)
     std::stringstream s;
     s << type << code;
     return lines_color[s.str()];
+}
+
+static std::string getCityFromPos(Pos p)
+{
+    std::stringstream cmd;
+    cmd << "./geo_toolbox/coord_info.sh " << p.longitude << " " << p.latitude;
+    return bash_exec(cmd.str().c_str());
+}
+
+void Graph::addStationsPopulation()
+{
+    Log l(__FUNCTION__);
+
+    int n = 0;
+    l << "Add population for " << n << "/" << order_ << " stations.\n";
+}
+
+void Graph::addStationsEmployment()
+{
+    Log l(__FUNCTION__);
+
+    int n = 0;
+    for (size_t i = 0; i < stations_data.size(); i++)
+    {
+        Pos p = stations_data[i].position;
+        std::string city = getCityFromPos(p);
+
+        CSVParser csv_parser("data/employment_per_cities.csv", ";");
+        CSV cities_employment = csv_parser.getData();
+
+        size_t j = 0;
+        while (j < cities_employment.size()
+               && cities_employment[j][1].compare(city))
+            j++;
+
+        if (j < cities_employment.size())
+        {
+            int employment = std::stoi(cities_employment[j][2]);
+            std::cout << "Find " << employment << "for the city of " << city
+                      << "\n";
+            stations_data[i].employment = employment;
+            n++;
+        } else
+        {
+            Log l2(__FUNCTION__, true);
+            l2 << "Dont find the city " << city << "\n";
+        }
+    }
 }
 
 void Graph::addStationsPosition()
@@ -161,13 +229,100 @@ void Graph::initStations(CSV lines_csv, std::string type)
 void Graph::correctFailure()
 {
     Log l(__FUNCTION__);
-    l << "Magenta --> Gare du Nord\n";
+    l << "Fix same station with different name\n";
     addEdgePair(getStationId("Magenta"), getStationId("Gare du Nord"), 0, 5, 0);
-    addEdgePair(getStationId("Anvers"), getStationId("Funiculaire Gare basse"),
-                0, 5, 0);
-    addEdgePair(getStationId("Villejuif - Louis Aragon"),
-                getStationId("Villejuif-Louis Aragon"), 0, 1.5, 0);
-    addEdgePair(getStationId("Gare de Bondy"), getStationId("Bondy"), 0, 2, 0);
+
+    /* addEdgePair(getStationId("Anvers"), getStationId("Funiculaire Gare
+     basse"), 0, 5, 0); addEdgePair(getStationId("Villejuif - Louis
+     Aragon"), getStationId("Villejuif-Louis Aragon"), 0, 1.5, 0);
+     addEdgePair(getStationId("Gare de Bondy"), getStationId("Bondy"), 0, 2,
+     0); addEdgePair(getStationId("Chatillon Montrouge"),
+                 getStationId("Chatillon - Montrouge"), 0, 2, 0);*/
+    l << "Fix line with junction\n";
+    // RER A
+    addEdgePair(getStationId("Vincennes"), getStationId("Fontenay-sous-Bois"),
+                getLineId("rers", "A"), getTypeDuration("rers"), 0);
+    removeEdgePair(getStationId("Marne-la-Vallee Chessy"),
+                   getStationId("Fontenay-sous-Bois"), getLineId("rers", "A"));
+    addEdgePair(getStationId("Nanterre-Prefecture"),
+                getStationId("Nanterre-Universite"), getLineId("rers", "A"),
+                getTypeDuration("rers"), 0);
+    removeEdgePair(getStationId("Cergy-Le-Haut"),
+                   getStationId("Nanterre-Universite"), getLineId("rers", "A"));
+    addEdgePair(getStationId("Maisons-Laffitte"), getStationId("Acheres-Ville"),
+                getLineId("rers", "A"), getTypeDuration("rers"), 0);
+    removeEdgePair(getStationId("Poissy"), getStationId("Acheres-Ville"),
+                   getLineId("rers", "A"));
+    // RER B
+    addEdgePair(getStationId("Aulnay-sous-Bois"),
+                getStationId("Sevran-Beaudottes"), getLineId("rers", "B"),
+                getTypeDuration("rers"), 0);
+    removeEdgePair(getStationId("Mitry-Claye"),
+                   getStationId("Sevran-Beaudottes"), getLineId("rers", "B"));
+    addEdgePair(getStationId("Bourg-la-Reine"), getStationId("Parc de Sceaux"),
+                getLineId("rers", "B"), getTypeDuration("rers"), 0);
+    removeEdgePair(getStationId("Robinson"), getStationId("Parc de Sceaux"),
+                   getLineId("rers", "B"));
+
+    // RER C
+    addEdgePair(getStationId("Petit Vaux"), getStationId("Savigny-sur-Orge"),
+                getLineId("rers", "C"), getTypeDuration("rers"), 0);
+    removeEdgePair(getStationId("Saint-Martin-d'Etampes"),
+                   getStationId("Versailles-Chantiers"),
+                   getLineId("rers", "C"));
+
+    addEdgePair(getStationId("Les Saules"), getStationId("Choisy-le-Roi"),
+                getLineId("rers", "C"), getTypeDuration("rers"), 0);
+    removeEdgePair(getStationId("Petit Vaux"), getStationId("Massy-Verrières"),
+                   getLineId("rers", "C"));
+
+    addEdgePair(getStationId("Massy-Verrières"),
+                getStationId("Massy-Palaiseau"), getLineId("rers", "C"),
+                getTypeDuration("rers"), 0);
+
+    addEdgePair(getStationId("Javel"),
+                getStationId("Champ de Mars - Tour Eiffel"),
+                getLineId("rers", "C"), getTypeDuration("rers"), 0);
+    removeEdgePair(getStationId("Les Saules"),
+                   getStationId("Saint-Quentin-en-Yvelines"),
+                   getLineId("rers", "C"));
+
+    addEdgePair(getStationId("Porchefontaine"),
+                getStationId("Viroflay-Rive-Gauche"), getLineId("rers", "C"),
+                getTypeDuration("rers"), 0);
+    removeEdgePair(getStationId("Javel"),
+                   getStationId("Versailles-Château-Rive-Gauche"),
+                   getLineId("rers", "C"));
+
+    // RER D
+    addEdgePair(getStationId("Villeneuve-Saint-Georges"),
+                getStationId("Vigneux-sur-Seine"), getLineId("rers", "D"),
+                getTypeDuration("rers"), 0);
+    addEdgePair(getStationId("Le Mée"), getStationId("Melun"),
+                getLineId("rers", "D"), getTypeDuration("rers"), 0);
+    removeEdgePair(getStationId("Le Mée"), getStationId("Vigneux-sur-Seine"),
+                   getLineId("rers", "D"));
+
+    addEdgePair(getStationId("Viry-Châtillon"), getStationId("Grigny-Centre"),
+                getLineId("rers", "D"), getTypeDuration("rers"), 0);
+    addEdgePair(getStationId("Évry-Val-de-Seine"),
+                getStationId("Corbeil-Essonnes"), getLineId("rers", "D"),
+                getTypeDuration("rers"), 0);
+    removeEdgePair(getStationId("Évry-Val-de-Seine"),
+                   getStationId("Grigny-Centre"), getLineId("rers", "D"));
+
+    addEdgePair(getStationId("Corbeil-Essonnes"),
+                getStationId("Essonnes - Robinson"), getLineId("rers", "D"),
+                getTypeDuration("rers"), 0);
+    removeEdgePair(getStationId("Malesherbes"),
+                   getStationId("Essonnes - Robinson"), getLineId("rers", "D"));
+
+    // RER E
+    addEdgePair(getStationId("Noisy-le-Sec"),
+                getStationId("Rosny-Bois-Perrier"), getLineId("rers", "E"),
+                getTypeDuration("rers"), 0);
+    removeEdgePair(getStationId("Chelles Gournay"),
+                   getStationId("Rosny-Bois-Perrier"), getLineId("rers", "E"));
 }
 
 Graph::Graph()
@@ -185,16 +340,20 @@ Graph::Graph()
         throw;
     }
 
-    l << "Import metros stations\n";
-    initStations(lines_csv, "metros");
     l << "Import rers stations\n";
     initStations(lines_csv, "rers");
-    l << "Import tramways stations\n";
-    initStations(lines_csv, "tramways");
+    // l << "Import transilien stations\n";
+    // initStations(lines_csv, "transiliens");
+    // l << "Import metros stations\n";
+    // initStations(lines_csv, "metros");
+    // l << "Import tramways stations\n";
+    // initStations(lines_csv, "tramways");
     // l << "Import bus stations\n";
     // initStations(lines_csv, "bus");
 
     addStationsPosition();
+    addStationsPopulation();
+    addStationsEmployment();
 
     correctFailure();
 }
