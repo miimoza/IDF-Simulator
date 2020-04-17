@@ -1,0 +1,111 @@
+{
+    "result": {
+        "stations": [
+            {
+                "slug": "pont+garigliano+++hopital+europeen+george+pompidou",
+                "name": "Pont Garigliano - Hopital Europeen George Pompidou"
+            },
+            {
+                "slug": "balard",
+                "name": "Balard"
+            },
+            {
+                "slug": "desnouettes",
+                "name": "Desnouettes"
+            },
+            {
+                "slug": "porte+de+versailles+++parc+des+expositions",
+                "name": "Porte de Versailles - Parc des Expositions"
+            },
+            {
+                "slug": "georges+brassens",
+                "name": "Georges Brassens"
+            },
+            {
+                "slug": "brancion",
+                "name": "Brancion"
+            },
+            {
+                "slug": "porte+de+vanves",
+                "name": "Porte de Vanves"
+            },
+            {
+                "slug": "didot",
+                "name": "Didot"
+            },
+            {
+                "slug": "jean+moulin",
+                "name": "Jean Moulin"
+            },
+            {
+                "slug": "porte+d'orleans",
+                "name": "Porte d'Orleans"
+            },
+            {
+                "slug": "montsouris",
+                "name": "Montsouris"
+            },
+            {
+                "slug": "cite+universitaire",
+                "name": "Cite Universitaire"
+            },
+            {
+                "slug": "stade+charlety+++porte+de+gentilly",
+                "name": "Stade Charlety - Porte de Gentilly"
+            },
+            {
+                "slug": "poterne+des+peupliers",
+                "name": "Poterne des Peupliers"
+            },
+            {
+                "slug": "porte+d'italie",
+                "name": "Porte d'Italie"
+            },
+            {
+                "slug": "porte+de+choisy",
+                "name": "Porte de Choisy"
+            },
+            {
+                "slug": "porte+d'ivry",
+                "name": "Porte d'Ivry"
+            },
+            {
+                "slug": "maryse+bastie",
+                "name": "Maryse Bastie"
+            },
+            {
+                "slug": "avenue+de+france",
+                "name": "Avenue de France"
+            },
+            {
+                "slug": "baron+le+roy",
+                "name": "Baron le Roy"
+            },
+            {
+                "slug": "porte+de+charenton",
+                "name": "Porte de Charenton"
+            },
+            {
+                "slug": "porte+doree",
+                "name": "Porte Doree"
+            },
+            {
+                "slug": "montempoivre",
+                "name": "Montempoivre"
+            },
+            {
+                "slug": "alexandra+david+neel",
+                "name": "Alexandra David-Neel"
+            },
+            {
+                "slug": "porte+de+vincennes",
+                "name": "Porte de Vincennes"
+            }
+        ]
+    },
+    "_metadata": {
+        "call": "GET /stations/tramways/3a",
+        "date": "2020-04-12T19:42:00+02:00",
+        "version": 3
+    }
+}

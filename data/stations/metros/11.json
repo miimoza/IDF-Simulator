@@ -1,0 +1,63 @@
+{
+    "result": {
+        "stations": [
+            {
+                "slug": "mairie+des+lilas",
+                "name": "Mairie des Lilas"
+            },
+            {
+                "slug": "porte+des+lilas",
+                "name": "Porte des Lilas"
+            },
+            {
+                "slug": "telegraphe",
+                "name": "Telegraphe"
+            },
+            {
+                "slug": "place+des+fetes",
+                "name": "Place des Fetes"
+            },
+            {
+                "slug": "jourdain",
+                "name": "Jourdain"
+            },
+            {
+                "slug": "pyrenees",
+                "name": "Pyrenees"
+            },
+            {
+                "slug": "belleville",
+                "name": "Belleville"
+            },
+            {
+                "slug": "goncourt+(hopital+saint+louis)",
+                "name": "Goncourt (Hopital Saint-Louis)"
+            },
+            {
+                "slug": "republique",
+                "name": "Republique"
+            },
+            {
+                "slug": "arts+et+metiers",
+                "name": "Arts-et-Metiers"
+            },
+            {
+                "slug": "rambuteau",
+                "name": "Rambuteau"
+            },
+            {
+                "slug": "hotel+de+ville",
+                "name": "Hotel de Ville"
+            },
+            {
+                "slug": "chatelet",
+                "name": "Chatelet"
+            }
+        ]
+    },
+    "_metadata": {
+        "call": "GET /stations/metros/11",
+        "date": "2020-04-12T19:41:45+02:00",
+        "version": 3
+    }
+}

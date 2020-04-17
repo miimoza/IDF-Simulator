@@ -1,0 +1,75 @@
+{
+    "result": {
+        "stations": [
+            {
+                "slug": "garges+sarcelles+rer",
+                "name": "Garges-Sarcelles RER"
+            },
+            {
+                "slug": "locheres",
+                "name": "Locheres"
+            },
+            {
+                "slug": "paul+valery",
+                "name": "Paul Valery"
+            },
+            {
+                "slug": "les+flanades",
+                "name": "Les Flanades"
+            },
+            {
+                "slug": "les+cholettes",
+                "name": "Les Cholettes"
+            },
+            {
+                "slug": "butte+pinson+(parc+regional)",
+                "name": "Butte Pinson (Parc Regional)"
+            },
+            {
+                "slug": "jacques+prevert",
+                "name": "Jacques Prevert"
+            },
+            {
+                "slug": "alcide+d'orbigny",
+                "name": "Alcide d'Orbigny"
+            },
+            {
+                "slug": "mairie+de+pierrefitte",
+                "name": "Mairie de Pierrefitte"
+            },
+            {
+                "slug": "suzanne+valadon",
+                "name": "Suzanne Valadon"
+            },
+            {
+                "slug": "joncherolles",
+                "name": "Joncherolles"
+            },
+            {
+                "slug": "petit+pierrefitte",
+                "name": "Petit Pierrefitte"
+            },
+            {
+                "slug": "guynemer+(stade+auguste+delaune)",
+                "name": "Guynemer (Stade Auguste Delaune)"
+            },
+            {
+                "slug": "roger+semat",
+                "name": "Roger Semat"
+            },
+            {
+                "slug": "baudelaire",
+                "name": "Baudelaire"
+            },
+            {
+                "slug": "marche+de+saint+denis",
+                "name": "Marche de Saint-Denis"
+            }
+        ]
+    },
+    "_metadata": {
+        "call": "GET /stations/tramways/5",
+        "date": "2020-04-12T19:42:02+02:00",
+        "version": 3
+    }
+}

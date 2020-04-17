@@ -1,0 +1,99 @@
+{
+    "result": {
+        "stations": [
+            {
+                "slug": "bobigny+pablo+picasso",
+                "name": "Bobigny-Pablo-Picasso"
+            },
+            {
+                "slug": "bobigny+pantin+(raymond+queneau)",
+                "name": "Bobigny-Pantin (Raymond Queneau)"
+            },
+            {
+                "slug": "eglise+de+pantin",
+                "name": "Eglise de Pantin"
+            },
+            {
+                "slug": "hoche",
+                "name": "Hoche"
+            },
+            {
+                "slug": "porte+de+pantin",
+                "name": "Porte de Pantin"
+            },
+            {
+                "slug": "ourcq",
+                "name": "Ourcq"
+            },
+            {
+                "slug": "laumiere",
+                "name": "Laumiere"
+            },
+            {
+                "slug": "jaures",
+                "name": "Jaures"
+            },
+            {
+                "slug": "stalingrad",
+                "name": "Stalingrad"
+            },
+            {
+                "slug": "gare+du+nord",
+                "name": "Gare du Nord"
+            },
+            {
+                "slug": "gare+de+l'est+(verdun)",
+                "name": "Gare de l'Est (Verdun)"
+            },
+            {
+                "slug": "jacques+bonsergent",
+                "name": "Jacques-Bonsergent"
+            },
+            {
+                "slug": "republique",
+                "name": "Republique"
+            },
+            {
+                "slug": "oberkampf",
+                "name": "Oberkampf"
+            },
+            {
+                "slug": "richard+lenoir",
+                "name": "Richard-Lenoir"
+            },
+            {
+                "slug": "breguet+sabin",
+                "name": "Breguet-Sabin"
+            },
+            {
+                "slug": "bastille",
+                "name": "Bastille"
+            },
+            {
+                "slug": "quai+de+la+rapee",
+                "name": "Quai de la Rapee"
+            },
+            {
+                "slug": "gare+d'austerlitz",
+                "name": "Gare d'Austerlitz"
+            },
+            {
+                "slug": "saint+marcel",
+                "name": "Saint-Marcel"
+            },
+            {
+                "slug": "campo+formio",
+                "name": "Campo-Formio"
+            },
+            {
+                "slug": "place+d'italie",
+                "name": "Place d'Italie"
+            }
+        ]
+    },
+    "_metadata": {
+        "call": "GET /stations/metros/5",
+        "date": "2020-04-12T19:41:41+02:00",
+        "version": 3
+    }
+}

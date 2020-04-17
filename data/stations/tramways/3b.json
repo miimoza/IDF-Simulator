@@ -1,0 +1,115 @@
+{
+    "result": {
+        "stations": [
+            {
+                "slug": "porte+de+vincennes",
+                "name": "Porte de Vincennes"
+            },
+            {
+                "slug": "porte+de+montreuil",
+                "name": "Porte de Montreuil"
+            },
+            {
+                "slug": "marie+de+miribel",
+                "name": "Marie de Miribel"
+            },
+            {
+                "slug": "porte+de+bagnolet",
+                "name": "Porte de Bagnolet"
+            },
+            {
+                "slug": "severine",
+                "name": "Severine"
+            },
+            {
+                "slug": "adrienne+bolland",
+                "name": "Adrienne Bolland"
+            },
+            {
+                "slug": "porte+des+lilas",
+                "name": "Porte des Lilas"
+            },
+            {
+                "slug": "hopital+robert+debre",
+                "name": "Hopital Robert Debre"
+            },
+            {
+                "slug": "butte+du+chapeau+rouge",
+                "name": "Butte du Chapeau Rouge"
+            },
+            {
+                "slug": "porte+de+pantin+++parc+de+la+villette",
+                "name": "Porte de Pantin - Parc de la Villette"
+            },
+            {
+                "slug": "delphine+seyrig",
+                "name": "Delphine Seyrig"
+            },
+            {
+                "slug": "ella+fitzgerald+++grands+moulins+de+pantin",
+                "name": "Ella Fitzgerald - Grands Moulins de Pantin"
+            },
+            {
+                "slug": "porte+de+la+villette+++cite+des+sciences+et+de+l'industrie",
+                "name": "Porte de la Villette - Cite des Sciences et de l'Industrie"
+            },
+            {
+                "slug": "canal+saint+denis",
+                "name": "Canal Saint-Denis"
+            },
+            {
+                "slug": "rosa+parks",
+                "name": "Rosa Parks"
+            },
+            {
+                "slug": "porte+d'aubervilliers",
+                "name": "Porte d'Aubervilliers"
+            },
+            {
+                "slug": "colette+besson",
+                "name": "Colette Besson"
+            },
+            {
+                "slug": "porte+de+la+chapelle",
+                "name": "Porte de la Chapelle"
+            },
+            {
+                "slug": "diane+arbus+++porte+des+poissonniers",
+                "name": "Diane Arbus - Porte des Poissonniers"
+            },
+            {
+                "slug": "porte+de+clignancourt+++puces+de+saint+ouen",
+                "name": "Porte de Clignancourt - Puces de Saint-Ouen"
+            },
+            {
+                "slug": "angelique+compoint+++porte+de+montmartre",
+                "name": "Angelique Compoint - Porte de Montmartre"
+            },
+            {
+                "slug": "porte+de+saint+ouen",
+                "name": "Porte de Saint-Ouen"
+            },
+            {
+                "slug": "epinettes+++pouchet",
+                "name": "Epinettes - Pouchet"
+            },
+            {
+                "slug": "honore+de+balzac",
+                "name": "Honore de Balzac"
+            },
+            {
+                "slug": "porte+de+clichy+++tribunal+de+paris",
+                "name": "Porte de Clichy - Tribunal de Paris"
+            },
+            {
+                "slug": "porte+d'asnieres+++marguerite+long",
+                "name": "Porte d'Asnieres - Marguerite Long"
+            }
+        ]
+    },
+    "_metadata": {
+        "call": "GET /stations/tramways/3b",
+        "date": "2020-04-12T19:42:01+02:00",
+        "version": 3
+    }
+}

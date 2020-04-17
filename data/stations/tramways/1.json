@@ -1,0 +1,159 @@
+{
+    "result": {
+        "stations": [
+            {
+                "slug": "gare+de+noisy+le+sec",
+                "name": "Gare de Noisy-Le-Sec"
+            },
+            {
+                "slug": "petit+noisy",
+                "name": "Petit Noisy"
+            },
+            {
+                "slug": "pont+de+bondy",
+                "name": "Pont de Bondy"
+            },
+            {
+                "slug": "auguste+delaune",
+                "name": "Auguste Delaune"
+            },
+            {
+                "slug": "jean+rostand",
+                "name": "Jean Rostand"
+            },
+            {
+                "slug": "bobigny+++pablo+picasso",
+                "name": "Bobigny - Pablo Picasso"
+            },
+            {
+                "slug": "hotel+de+ville+de+bobigny",
+                "name": "Hotel de Ville de Bobigny"
+            },
+            {
+                "slug": "liberation",
+                "name": "Liberation"
+            },
+            {
+                "slug": "la+ferme",
+                "name": "La Ferme"
+            },
+            {
+                "slug": "escadrille+normandie+niemen",
+                "name": "Escadrille Normandie-Niemen"
+            },
+            {
+                "slug": "gaston+roulaud",
+                "name": "Gaston Roulaud"
+            },
+            {
+                "slug": "hopital+avicenne",
+                "name": "Hopital Avicenne"
+            },
+            {
+                "slug": "drancy+++avenir",
+                "name": "Drancy - Avenir"
+            },
+            {
+                "slug": "maurice+lachatre",
+                "name": "Maurice Lachatre"
+            },
+            {
+                "slug": "la+courneuve+++8+mai+1945",
+                "name": "La Courneuve - 8 Mai 1945"
+            },
+            {
+                "slug": "danton",
+                "name": "Danton"
+            },
+            {
+                "slug": "stade+geo+andre",
+                "name": "Stade Geo Andre"
+            },
+            {
+                "slug": "hotel+de+ville+de+la+courneuve",
+                "name": "Hotel de Ville de la Courneuve"
+            },
+            {
+                "slug": "la+courneuve+++six+routes",
+                "name": "La Courneuve - Six Routes"
+            },
+            {
+                "slug": "cosmonautes",
+                "name": "Cosmonautes"
+            },
+            {
+                "slug": "hopital+delafontaine",
+                "name": "Hopital Delafontaine"
+            },
+            {
+                "slug": "cimetiere+de+saint+denis",
+                "name": "Cimetiere de Saint-Denis"
+            },
+            {
+                "slug": "basilique+de+saint+denis",
+                "name": "Basilique de Saint-Denis"
+            },
+            {
+                "slug": "marche+de+saint+denis",
+                "name": "Marche de Saint-Denis"
+            },
+            {
+                "slug": "theatre+gerard+philipe",
+                "name": "Theatre Gerard Philipe"
+            },
+            {
+                "slug": "gare+de+saint+denis",
+                "name": "Gare de Saint-Denis"
+            },
+            {
+                "slug": "l'ile+saint+denis",
+                "name": "L'Ile-Saint-Denis"
+            },
+            {
+                "slug": "mairie+de+villeneuve+la+garenne",
+                "name": "Mairie de Villeneuve-La Garenne"
+            },
+            {
+                "slug": "la+noue",
+                "name": "La Noue"
+            },
+            {
+                "slug": "chemin+des+reniers",
+                "name": "Chemin des Reniers"
+            },
+            {
+                "slug": "parc+des+chanteraines",
+                "name": "Parc des Chanteraines"
+            },
+            {
+                "slug": "gare+de+gennevilliers",
+                "name": "Gare de Gennevilliers"
+            },
+            {
+                "slug": "timbaud",
+                "name": "Timbaud"
+            },
+            {
+                "slug": "le+village",
+                "name": "Le Village"
+            },
+            {
+                "slug": "le+luth",
+                "name": "Le Luth"
+            },
+            {
+                "slug": "les+courtilles",
+                "name": "Les Courtilles"
+            },
+            {
+                "slug": "asnieres+++quatre+routes",
+                "name": "Asnieres - Quatre Routes"
+            }
+        ]
+    },
+    "_metadata": {
+        "call": "GET /stations/tramways/1",
+        "date": "2020-04-12T19:41:59+02:00",
+        "version": 3
+    }
+}

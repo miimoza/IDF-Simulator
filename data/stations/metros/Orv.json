@@ -1,0 +1,23 @@
+{
+    "result": {
+        "stations": [
+            {
+                "slug": "antony",
+                "name": "Antony"
+            },
+            {
+                "slug": "orly+1+2+3",
+                "name": "Orly 1-2-3"
+            },
+            {
+                "slug": "orly+4",
+                "name": "Orly 4"
+            }
+        ]
+    },
+    "_metadata": {
+        "call": "GET /stations/metros/Orv",
+        "date": "2020-04-12T19:41:47+02:00",
+        "version": 3
+    }
+}

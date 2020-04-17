@@ -1,0 +1,43 @@
+{
+    "result": {
+        "stations": [
+            {
+                "slug": "pre+saint+gervais",
+                "name": "Pre-Saint-Gervais"
+            },
+            {
+                "slug": "danube",
+                "name": "Danube"
+            },
+            {
+                "slug": "botzaris",
+                "name": "Botzaris"
+            },
+            {
+                "slug": "buttes+chaumont",
+                "name": "Buttes-Chaumont"
+            },
+            {
+                "slug": "bolivar",
+                "name": "Bolivar"
+            },
+            {
+                "slug": "jaures",
+                "name": "Jaures"
+            },
+            {
+                "slug": "louis+blanc",
+                "name": "Louis Blanc"
+            },
+            {
+                "slug": "place+des+fetes",
+                "name": "Place des Fetes"
+            }
+        ]
+    },
+    "_metadata": {
+        "call": "GET /stations/metros/7b",
+        "date": "2020-04-12T19:41:43+02:00",
+        "version": 3
+    }
+}

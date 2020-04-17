@@ -1,9 +1,11 @@
 #include "graph.hh"
 
 #include <algorithm>
+#include <iomanip>
 #include <iostream>
 
 #include "log.hh"
+#include "utils.hh"
 
 void Graph::addEdgePair(int src_id, int dst_id, int line_id, float duration,
                         float traffic)
@@ -47,7 +49,7 @@ void Graph::addEdge(int src_id, int dst_id, int line_id, float duration,
 int Graph::getStationId(std::string name)
 {
     for (int i = 0; i < order_; i++)
-        if (!name.compare(stations_data[i].name))
+        if (!compareAdvanced(name, stations_data[i].name))
             return i;
     Log l(__FUNCTION__, true);
     l << "Can't find station " << name << "\n";
@@ -68,30 +70,23 @@ int Graph::getOrder()
     return order_;
 }
 
-void Graph::dump()
+float Graph::getTotalPopulation()
 {
-    for (int i = 0; i < order_; i++)
-    {
-        std::cout << i << ":" << stations_data[i].name
-                  << "|p:" << stations_data[i].population
-                  << "|e:" << stations_data[i].employment << "|pos("
-                  << stations_data[i].position.latitude << ","
-                  << stations_data[i].position.longitude << "){";
-
-        for (Edge e : adj_list[i])
-            std::cout << "(" << e.src_id << "->" << e.dst_id
-                      << "/l:" << e.line_id << "[" << lines_data[e.line_id].type
-                      << "," << lines_data[e.line_id].code << ","
-                      << lines_data[e.line_id].color << "]"
-                      << ",d:" << e.duration << ",t:" << e.traffic << ")";
-        std::cout << "}" << std::endl;
-    }
-    std::cout << "order_:" << order_
-              << ", stations_data.size():" << stations_data.size()
-              << ", lines_data.size():" << lines_data.size() << "\n";
+    float sum = 0;
+    for (auto s : stations_data)
+        sum += s.population;
+    return sum;
 }
 
-std::ostream& operator<<(std::ostream& os, const Graph& G)
+float Graph::getTotalEmployment()
+{
+    float sum = 0;
+    for (auto s : stations_data)
+        sum += s.employment;
+    return sum;
+}
+
+std::ostream& operator<<(std::ostream& os, Graph& G)
 {
     for (int i = 0; i < G.order_; i++)
     {
@@ -99,7 +94,9 @@ std::ostream& operator<<(std::ostream& os, const Graph& G)
            << "|p:" << G.stations_data[i].population
            << "|e:" << G.stations_data[i].employment << "|pos("
            << G.stations_data[i].position.latitude << ","
-           << G.stations_data[i].position.longitude << "){";
+           << G.stations_data[i].position.longitude << ")"
+           << G.stations_data[i].city << "(" << G.stations_data[i].city_id
+           << "){";
 
         for (Edge e : G.adj_list[i])
             os << "(" << e.src_id << "->" << e.dst_id << "/l:" << e.line_id
@@ -109,9 +106,11 @@ std::ostream& operator<<(std::ostream& os, const Graph& G)
                << ",d:" << e.duration << ",t:" << e.traffic << ")";
         os << "}" << std::endl;
     }
-    os << "order_:" << G.order_
+    os << std::fixed << std::setprecision(2) << "order_:" << G.order_
        << ", stations_data.size():" << G.stations_data.size()
-       << ", lines_data.size():" << G.lines_data.size() << "\n";
+       << ", lines_data.size():" << G.lines_data.size()
+       << ", pop:" << G.total_population_ << ", emp:" << G.total_employment_
+       << "\n";
 
     return os;
 }

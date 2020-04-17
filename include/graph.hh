@@ -20,6 +20,8 @@ struct StationData
     float population;
     float employment;
     Pos position;
+    std::string city;
+    int city_id;
 };
 
 struct LineData
@@ -47,15 +49,22 @@ public:
     std::vector<StationData> stations_data;
     std::vector<LineData> lines_data;
 
+    // VALUE
+    float total_population_;
+    float total_employment_;
+
     // GRAPH CREATION
     Graph();
     void initStations(CSV lines_csv, std::string type);
     int addStation(std::string name, float population, float employment,
-                   Pos position);
+                   Pos position, std::string city, int city_id);
     int addLine(std::string type, std::string code, std::string color);
-    void addStationsPosition();
+
     void addStationsPopulation();
     void addStationsEmployment();
+    void addStationsPosition();
+    void addStationCity();
+    void sharePopEmp();
     void correctFailure();
 
     // CASUAL OPERATIONS
@@ -68,7 +77,8 @@ public:
     int getStationId(std::string name);
     int getLineId(std::string type, std::string code);
     int getOrder();
-    void dump();
+    float getTotalPopulation();
+    float getTotalEmployment();
 
     // DIJKSTRA DISTRIBUTION
     void dijkstraDistribution();
@@ -80,7 +90,7 @@ public:
     void generateDot(std::string filename);
 
     // DEBUG
-    friend std::ostream& operator<<(std::ostream& os, const Graph& G);
+    friend std::ostream& operator<<(std::ostream& os, Graph& G);
 
 private:
     int order_;

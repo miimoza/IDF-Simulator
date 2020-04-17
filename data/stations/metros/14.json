@@ -1,0 +1,47 @@
+{
+    "result": {
+        "stations": [
+            {
+                "slug": "saint+lazare",
+                "name": "Saint-Lazare"
+            },
+            {
+                "slug": "madeleine",
+                "name": "Madeleine"
+            },
+            {
+                "slug": "pyramides",
+                "name": "Pyramides"
+            },
+            {
+                "slug": "chatelet",
+                "name": "Chatelet"
+            },
+            {
+                "slug": "gare+de+lyon",
+                "name": "Gare de Lyon"
+            },
+            {
+                "slug": "bercy",
+                "name": "Bercy"
+            },
+            {
+                "slug": "cour+saint+emilion",
+                "name": "Cour Saint-Emilion"
+            },
+            {
+                "slug": "bibliotheque+francois+mitterrand",
+                "name": "Bibliotheque-Francois Mitterrand"
+            },
+            {
+                "slug": "olympiades",
+                "name": "Olympiades"
+            }
+        ]
+    },
+    "_metadata": {
+        "call": "GET /stations/metros/14",
+        "date": "2020-04-12T19:41:46+02:00",
+        "version": 3
+    }
+}

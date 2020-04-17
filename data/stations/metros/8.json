@@ -1,0 +1,163 @@
+{
+    "result": {
+        "stations": [
+            {
+                "slug": "balard",
+                "name": "Balard"
+            },
+            {
+                "slug": "lourmel",
+                "name": "Lourmel"
+            },
+            {
+                "slug": "boucicaut",
+                "name": "Boucicaut"
+            },
+            {
+                "slug": "felix+faure",
+                "name": "Felix Faure"
+            },
+            {
+                "slug": "commerce",
+                "name": "Commerce"
+            },
+            {
+                "slug": "la+motte+picquet+grenelle",
+                "name": "La Motte-Picquet-Grenelle"
+            },
+            {
+                "slug": "ecole+militaire",
+                "name": "Ecole Militaire"
+            },
+            {
+                "slug": "la+tour+maubourg",
+                "name": "La Tour-Maubourg"
+            },
+            {
+                "slug": "invalides",
+                "name": "Invalides"
+            },
+            {
+                "slug": "concorde",
+                "name": "Concorde"
+            },
+            {
+                "slug": "madeleine",
+                "name": "Madeleine"
+            },
+            {
+                "slug": "opera",
+                "name": "Opera"
+            },
+            {
+                "slug": "richelieu+drouot",
+                "name": "Richelieu-Drouot"
+            },
+            {
+                "slug": "grands+boulevards",
+                "name": "Grands Boulevards"
+            },
+            {
+                "slug": "bonne+nouvelle",
+                "name": "Bonne Nouvelle"
+            },
+            {
+                "slug": "strasbourg+saint+denis",
+                "name": "Strasbourg-Saint-Denis"
+            },
+            {
+                "slug": "republique",
+                "name": "Republique"
+            },
+            {
+                "slug": "filles+du+calvaire",
+                "name": "Filles du Calvaire"
+            },
+            {
+                "slug": "saint+sebastien+froissart",
+                "name": "Saint-Sebastien-Froissart"
+            },
+            {
+                "slug": "chemin+vert",
+                "name": "Chemin Vert"
+            },
+            {
+                "slug": "bastille",
+                "name": "Bastille"
+            },
+            {
+                "slug": "ledru+rollin",
+                "name": "Ledru-Rollin"
+            },
+            {
+                "slug": "faidherbe+chaligny",
+                "name": "Faidherbe-Chaligny"
+            },
+            {
+                "slug": "reuilly+diderot",
+                "name": "Reuilly-Diderot"
+            },
+            {
+                "slug": "montgallet",
+                "name": "Montgallet"
+            },
+            {
+                "slug": "daumesnil+(felix+eboue)",
+                "name": "Daumesnil (Felix Eboue)"
+            },
+            {
+                "slug": "michel+bizot",
+                "name": "Michel Bizot"
+            },
+            {
+                "slug": "porte+doree",
+                "name": "Porte Doree"
+            },
+            {
+                "slug": "porte+de+charenton",
+                "name": "Porte de Charenton"
+            },
+            {
+                "slug": "liberte",
+                "name": "Liberte"
+            },
+            {
+                "slug": "charenton+ecoles",
+                "name": "Charenton-Ecoles"
+            },
+            {
+                "slug": "ecole+veterinaire+de+maisons+alfort",
+                "name": "Ecole Veterinaire de Maisons-Alfort"
+            },
+            {
+                "slug": "maisons+alfort+stade",
+                "name": "Maisons-Alfort-Stade"
+            },
+            {
+                "slug": "maisons+alfort+les+juilliottes",
+                "name": "Maisons-Alfort-Les Juilliottes"
+            },
+            {
+                "slug": "creteil+l'echat+(hopital+henri+mondor)",
+                "name": "Creteil-L'Echat (Hopital Henri Mondor)"
+            },
+            {
+                "slug": "creteil+universite",
+                "name": "Creteil-Universite"
+            },
+            {
+                "slug": "creteil+prefecture+(hotel+de+ville)",
+                "name": "Creteil-Prefecture (Hotel de Ville)"
+            },
+            {
+                "slug": "pointe+du+lac",
+                "name": "Pointe du Lac"
+            }
+        ]
+    },
+    "_metadata": {
+        "call": "GET /stations/metros/8",
+        "date": "2020-04-12T19:41:43+02:00",
+        "version": 3
+    }
+}

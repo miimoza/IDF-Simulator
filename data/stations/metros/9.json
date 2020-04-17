@@ -1,0 +1,159 @@
+{
+    "result": {
+        "stations": [
+            {
+                "slug": "pont+de+sevres",
+                "name": "Pont de Sevres"
+            },
+            {
+                "slug": "billancourt",
+                "name": "Billancourt"
+            },
+            {
+                "slug": "marcel+sembat",
+                "name": "Marcel Sembat"
+            },
+            {
+                "slug": "porte+de+saint+cloud",
+                "name": "Porte de Saint-Cloud"
+            },
+            {
+                "slug": "exelmans",
+                "name": "Exelmans"
+            },
+            {
+                "slug": "michel+ange+molitor",
+                "name": "Michel-Ange-Molitor"
+            },
+            {
+                "slug": "michel+ange+auteuil",
+                "name": "Michel-Ange-Auteuil"
+            },
+            {
+                "slug": "jasmin",
+                "name": "Jasmin"
+            },
+            {
+                "slug": "ranelagh",
+                "name": "Ranelagh"
+            },
+            {
+                "slug": "la+muette",
+                "name": "La Muette"
+            },
+            {
+                "slug": "rue+de+la+pompe+(avenue+georges+mandel)",
+                "name": "Rue de la Pompe (Avenue Georges Mandel)"
+            },
+            {
+                "slug": "trocadero",
+                "name": "Trocadero"
+            },
+            {
+                "slug": "iena",
+                "name": "Iena"
+            },
+            {
+                "slug": "alma+marceau",
+                "name": "Alma-Marceau"
+            },
+            {
+                "slug": "franklin+roosevelt",
+                "name": "Franklin-Roosevelt"
+            },
+            {
+                "slug": "saint+philippe+du+roule",
+                "name": "Saint-Philippe du Roule"
+            },
+            {
+                "slug": "miromesnil",
+                "name": "Miromesnil"
+            },
+            {
+                "slug": "saint+augustin",
+                "name": "Saint-Augustin"
+            },
+            {
+                "slug": "havre+caumartin",
+                "name": "Havre-Caumartin"
+            },
+            {
+                "slug": "chaussee+d'antin+(la+fayette)",
+                "name": "Chaussee d'Antin (La Fayette)"
+            },
+            {
+                "slug": "richelieu+drouot",
+                "name": "Richelieu-Drouot"
+            },
+            {
+                "slug": "grands+boulevards",
+                "name": "Grands Boulevards"
+            },
+            {
+                "slug": "bonne+nouvelle",
+                "name": "Bonne Nouvelle"
+            },
+            {
+                "slug": "strasbourg+saint+denis",
+                "name": "Strasbourg-Saint-Denis"
+            },
+            {
+                "slug": "republique",
+                "name": "Republique"
+            },
+            {
+                "slug": "oberkampf",
+                "name": "Oberkampf"
+            },
+            {
+                "slug": "saint+ambroise",
+                "name": "Saint-Ambroise"
+            },
+            {
+                "slug": "voltaire+(leon+blum)",
+                "name": "Voltaire (Leon Blum)"
+            },
+            {
+                "slug": "charonne",
+                "name": "Charonne"
+            },
+            {
+                "slug": "rue+des+boulets",
+                "name": "Rue des Boulets"
+            },
+            {
+                "slug": "nation",
+                "name": "Nation"
+            },
+            {
+                "slug": "buzenval",
+                "name": "Buzenval"
+            },
+            {
+                "slug": "maraichers",
+                "name": "Maraichers"
+            },
+            {
+                "slug": "porte+de+montreuil",
+                "name": "Porte de Montreuil"
+            },
+            {
+                "slug": "robespierre",
+                "name": "Robespierre"
+            },
+            {
+                "slug": "croix+de+chavaux+(jacques+duclos)",
+                "name": "Croix-de-Chavaux (Jacques Duclos)"
+            },
+            {
+                "slug": "mairie+de+montreuil",
+                "name": "Mairie de Montreuil"
+            }
+        ]
+    },
+    "_metadata": {
+        "call": "GET /stations/metros/9",
+        "date": "2020-04-12T19:41:44+02:00",
+        "version": 3
+    }
+}

@@ -1,0 +1,95 @@
+{
+    "result": {
+        "stations": [
+            {
+                "slug": "chatillon+++montrouge",
+                "name": "Chatillon - Montrouge"
+            },
+            {
+                "slug": "vauban",
+                "name": "Vauban"
+            },
+            {
+                "slug": "centre+de+chatillon",
+                "name": "Centre de Chatillon"
+            },
+            {
+                "slug": "parc+andre+malraux",
+                "name": "Parc Andre Malraux"
+            },
+            {
+                "slug": "division+leclerc",
+                "name": "Division Leclerc"
+            },
+            {
+                "slug": "soleil+levant",
+                "name": "Soleil Levant"
+            },
+            {
+                "slug": "hopital+beclere",
+                "name": "Hopital Beclere"
+            },
+            {
+                "slug": "mail+de+la+plaine",
+                "name": "Mail de la Plaine"
+            },
+            {
+                "slug": "pave+blanc+(parc+noveos)",
+                "name": "Pave Blanc (Parc Noveos)"
+            },
+            {
+                "slug": "georges+pompidou",
+                "name": "Georges Pompidou"
+            },
+            {
+                "slug": "georges+millandy",
+                "name": "Georges Millandy"
+            },
+            {
+                "slug": "meudon+la+foret",
+                "name": "Meudon-La-Foret"
+            },
+            {
+                "slug": "velizy+2",
+                "name": "Velizy 2"
+            },
+            {
+                "slug": "dewoitine",
+                "name": "Dewoitine"
+            },
+            {
+                "slug": "inovel+parc+nord",
+                "name": "Inovel Parc Nord"
+            },
+            {
+                "slug": "louvois",
+                "name": "Louvois"
+            },
+            {
+                "slug": "mairie+de+velizy",
+                "name": "Mairie de Velizy"
+            },
+            {
+                "slug": "l'onde+(maison+des+arts)",
+                "name": "L'Onde (Maison des Arts)"
+            },
+            {
+                "slug": "robert+wagner",
+                "name": "Robert Wagner"
+            },
+            {
+                "slug": "viroflay+++rive+gauche",
+                "name": "Viroflay - Rive Gauche"
+            },
+            {
+                "slug": "viroflay+++rive+droite",
+                "name": "Viroflay - Rive Droite"
+            }
+        ]
+    },
+    "_metadata": {
+        "call": "GET /stations/tramways/6",
+        "date": "2020-04-12T19:42:02+02:00",
+        "version": 3
+    }
+}

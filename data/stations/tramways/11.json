@@ -1,0 +1,39 @@
+{
+    "result": {
+        "stations": [
+            {
+                "slug": "epinay+sur+seine",
+                "name": "Epinay-Sur-Seine"
+            },
+            {
+                "slug": "epinay+villetaneuse",
+                "name": "Epinay-Villetaneuse"
+            },
+            {
+                "slug": "villetaneuse+universite",
+                "name": "Villetaneuse-Universite"
+            },
+            {
+                "slug": "pierrefitte+stains",
+                "name": "Pierrefitte-Stains"
+            },
+            {
+                "slug": "stains+la+cerisaie",
+                "name": "Stains-La Cerisaie"
+            },
+            {
+                "slug": "dugny+la+courneuve",
+                "name": "Dugny-La Courneuve"
+            },
+            {
+                "slug": "le+bourget",
+                "name": "Le Bourget"
+            }
+        ]
+    },
+    "_metadata": {
+        "call": "GET /stations/tramways/11",
+        "date": "2020-04-12T19:41:58+02:00",
+        "version": 3
+    }
+}

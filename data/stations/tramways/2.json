@@ -1,0 +1,107 @@
+{
+    "result": {
+        "stations": [
+            {
+                "slug": "pont+de+bezons",
+                "name": "Pont de Bezons"
+            },
+            {
+                "slug": "parc+pierre+lagravere",
+                "name": "Parc Pierre Lagravere"
+            },
+            {
+                "slug": "victor+basch",
+                "name": "Victor Basch"
+            },
+            {
+                "slug": "jacqueline+auriol",
+                "name": "Jacqueline Auriol"
+            },
+            {
+                "slug": "charlebourg",
+                "name": "Charlebourg"
+            },
+            {
+                "slug": "les+fauvelles",
+                "name": "Les Fauvelles"
+            },
+            {
+                "slug": "faubourg+de+l'arche",
+                "name": "Faubourg de l'Arche"
+            },
+            {
+                "slug": "la+defense",
+                "name": "La Defense"
+            },
+            {
+                "slug": "puteaux",
+                "name": "Puteaux"
+            },
+            {
+                "slug": "belvedere",
+                "name": "Belvedere"
+            },
+            {
+                "slug": "suresnes+longchamp",
+                "name": "Suresnes Longchamp"
+            },
+            {
+                "slug": "les+coteaux",
+                "name": "Les Coteaux"
+            },
+            {
+                "slug": "les+milons",
+                "name": "Les Milons"
+            },
+            {
+                "slug": "parc+de+st+cloud",
+                "name": "Parc de St-Cloud"
+            },
+            {
+                "slug": "musee+de+sevres",
+                "name": "Musee de Sevres"
+            },
+            {
+                "slug": "brimborion",
+                "name": "Brimborion"
+            },
+            {
+                "slug": "meudon+sur+seine",
+                "name": "Meudon Sur-Seine"
+            },
+            {
+                "slug": "les+moulineaux",
+                "name": "Les Moulineaux"
+            },
+            {
+                "slug": "jacques+henri+lartigue",
+                "name": "Jacques-Henri Lartigue"
+            },
+            {
+                "slug": "issy+++val+de+seine",
+                "name": "Issy - Val de Seine"
+            },
+            {
+                "slug": "henri+farman",
+                "name": "Henri Farman"
+            },
+            {
+                "slug": "suzanne+lenglen",
+                "name": "Suzanne Lenglen"
+            },
+            {
+                "slug": "porte+d'issy",
+                "name": "Porte d'Issy"
+            },
+            {
+                "slug": "porte+de+versailles",
+                "name": "Porte de Versailles"
+            }
+        ]
+    },
+    "_metadata": {
+        "call": "GET /stations/tramways/2",
+        "date": "2020-04-12T19:42:00+02:00",
+        "version": 3
+    }
+}

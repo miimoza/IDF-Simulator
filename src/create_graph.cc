@@ -88,48 +88,86 @@ static std::string getCityFromPos(Pos p)
 {
     std::stringstream cmd;
     cmd << "./geo_toolbox/coord_info.sh " << p.longitude << " " << p.latitude;
-    return bash_exec(cmd.str().c_str());
+    std::string city = bash_exec(cmd.str().c_str());
+    city.erase(std::remove(city.begin(), city.end(), '\n'), city.end());
+    return city;
 }
 
 void Graph::addStationsPopulation()
 {
     Log l(__FUNCTION__);
 
+    CSVParser csv_parser("data/population_per_city.csv", ",");
+    CSV cities_population = csv_parser.getData();
+
     int n = 0;
+    for (size_t i = 0; i < stations_data.size(); i++)
+    {
+        if (stations_data[i].city_id >= 0)
+        {
+            std::string city = stations_data[i].city;
+
+            size_t j = 0;
+            while (
+                j < cities_population.size()
+                && compareAdvanced(removeQuote(cities_population[j][5]), city))
+                j++;
+
+            if (j < cities_population.size())
+            {
+                int population =
+                    std::stoi(removeQuote(cities_population[j][14]));
+                // l << "Station: " << stations_data[i].name << ", City: " <<
+                // city
+                //  << ", population: " << population << "\n";
+                stations_data[i].population = population;
+                n++;
+            } else
+            {
+                Log l2(__FUNCTION__, true);
+                l2 << "Dont find the city " << city << "\n";
+            }
+        }
+    }
+
     l << "Add population for " << n << "/" << order_ << " stations.\n";
 }
 
 void Graph::addStationsEmployment()
 {
     Log l(__FUNCTION__);
+    CSVParser csv_parser("data/employment_per_city.csv", ";");
+    CSV cities_employment = csv_parser.getData();
 
     int n = 0;
     for (size_t i = 0; i < stations_data.size(); i++)
     {
-        Pos p = stations_data[i].position;
-        std::string city = getCityFromPos(p);
-
-        CSVParser csv_parser("data/employment_per_cities.csv", ";");
-        CSV cities_employment = csv_parser.getData();
-
-        size_t j = 0;
-        while (j < cities_employment.size()
-               && cities_employment[j][1].compare(city))
-            j++;
-
-        if (j < cities_employment.size())
+        if (stations_data[i].city_id >= 0)
         {
-            int employment = std::stoi(cities_employment[j][2]);
-            std::cout << "Find " << employment << "for the city of " << city
-                      << "\n";
-            stations_data[i].employment = employment;
-            n++;
-        } else
-        {
-            Log l2(__FUNCTION__, true);
-            l2 << "Dont find the city " << city << "\n";
+            std::string city = stations_data[i].city;
+
+            size_t j = 0;
+            while (j < cities_employment.size()
+                   && compareAdvanced(cities_employment[j][1], city))
+                j++;
+
+            if (j < cities_employment.size())
+            {
+                int employment = std::stoi(cities_employment[j][2]);
+                // l << "Station: " << stations_data[i].name << ", City: " <<
+                // city
+                //  << ", employment: " << employment << "\n";
+                stations_data[i].employment = employment;
+                n++;
+            } else
+            {
+                Log l2(__FUNCTION__, true);
+                l2 << "Dont find the city " << city << "\n";
+            }
         }
     }
+
+    l << "Add employement for " << n << "/" << order_ << " stations.\n";
 }
 
 void Graph::addStationsPosition()
@@ -147,9 +185,8 @@ void Graph::addStationsPosition()
     {
         for (size_t j = 0; j < stations_data.size(); j++)
         {
-            std::string s1 = boost::to_lower_copy(stations_position[i][6]);
-            std::string s2 = boost::to_lower_copy(stations_data[j].name);
-            if (!s1.compare(s2) && !stations_data[j].position.latitude)
+            if (!compareAdvanced(stations_position[i][6], stations_data[j].name)
+                && !stations_data[j].position.latitude)
             {
                 std::vector<std::string> pos_string;
                 boost::algorithm::split(pos_string, stations_position[i][0],
@@ -164,6 +201,80 @@ void Graph::addStationsPosition()
     l << "Add position for " << n << "/" << order_ << " stations.\n";
 }
 
+void Graph::addStationCity()
+{
+    Log l(__FUNCTION__);
+
+    CSVParser csv_parser("data/stations_sncf_ile-de-france.csv", ";");
+    CSV stations_csv = csv_parser.getData();
+
+    int city_id = 0;
+    int n = 0;
+    for (int i = 0; i < order_; i++)
+    {
+        size_t j = 0;
+        while (j < stations_csv.size()
+               && compareAdvanced(stations_csv[j][6], stations_data[i].name))
+            j++;
+
+        std::string city;
+        if (j < stations_csv.size())
+        {
+            city = stations_csv[j][9];
+        } else
+        {
+            Log l2(__FUNCTION__, true);
+            l2 << "Cant find " << stations_data[i].name
+               << " in the .csv, try getCityFromPos API...\n";
+            continue;
+            city = getCityFromPos(stations_data[i].position);
+        }
+
+        int k = 0;
+        while (k < order_ && stations_data[k].city.compare(city))
+            k++;
+
+        stations_data[i].city_id =
+            (k == order_) ? city_id++ : stations_data[k].city_id;
+        stations_data[i].city = city;
+
+        // l << "Station: " << stations_data[i].name
+        //  << "---> City: " << stations_data[i].city
+        //  << "(id:" << stations_data[i].city_id << ")\n";
+        n++;
+    }
+
+    l << "Add City for " << n << "/" << order_ << " stations.\n";
+    l << "Get " << city_id << " different cities\n";
+}
+
+void Graph::sharePopEmp()
+{
+    Log l(__FUNCTION__);
+
+    // Get Number of stations per city
+    std::map<int, int> stations_per_city;
+    for (int i = 0; i < order_; i++)
+        stations_per_city[stations_data[i].city_id]++;
+
+    int n = 0;
+
+    // Share each population/employment between all the stations in the city
+    for (int i = 0; i < order_; i++)
+    {
+        if (stations_data[i].city_id >= 0)
+        {
+            stations_data[i].population = stations_data[i].population
+                / stations_per_city[stations_data[i].city_id];
+            stations_data[i].employment = stations_data[i].employment
+                / stations_per_city[stations_data[i].city_id];
+            n++;
+        }
+    }
+
+    l << "Share Population/Employement for " << n << " stations.\n";
+}
+
 int Graph::addLine(std::string type, std::string code, std::string color)
 {
     lines_data.push_back({type, code, color});
@@ -171,7 +282,7 @@ int Graph::addLine(std::string type, std::string code, std::string color)
 }
 
 int Graph::addStation(std::string name, float population, float employment,
-                      Pos position)
+                      Pos position, std::string city, int city_id)
 {
     auto v = stations_data;
     auto it = std::find_if(v.begin(), v.end(), [&name](const StationData& s) {
@@ -187,13 +298,17 @@ int Graph::addStation(std::string name, float population, float employment,
     } else
     {
         int index = stations_data.size();
-        stations_data.push_back({name, population, employment, position});
+        stations_data.push_back(
+            {name, population, employment, position, city, city_id});
         return index;
     }
 }
 
 void Graph::initStations(CSV lines_csv, std::string type)
 {
+    // Add walking travel mode in line id 0
+    addLine("marche", "a pied", "#A9A9A9");
+
     for (std::string code : lines_csv[getTypeId(type)])
     {
         code = removeQuote(code);
@@ -209,12 +324,12 @@ void Graph::initStations(CSV lines_csv, std::string type)
             int line_id = addLine(type, code, getLineColor(type, code));
 
             std::string src_name = removeQuote(stations[0][0]);
-            int src_id = addStation(src_name, 5, 5, {0, 0});
+            int src_id = addStation(src_name, 5, 5, {0, 0}, "", -1);
 
             for (size_t i = 0; i < stations.size() - 1; i++)
             {
                 std::string dst_name = removeQuote(stations[i + 1][0]);
-                int dst_id = addStation(dst_name, 5, 5, {0, 0});
+                int dst_id = addStation(dst_name, 5, 5, {0, 0}, "", -1);
                 addEdgePair(src_id, dst_id, line_id, getTypeDuration(type), 0);
                 src_id = dst_id;
             }
@@ -230,14 +345,21 @@ void Graph::correctFailure()
 {
     Log l(__FUNCTION__);
     l << "Fix same station with different name\n";
-    addEdgePair(getStationId("Magenta"), getStationId("Gare du Nord"), 0, 5, 0);
+    /*addEdgePair(getStationId("Villejuif - Louis Aragon"),
+                getStationId("Villejuif-Louis Aragon"), 0, 1.5, 0);
+    addEdgePair(getStationId("Gare de Bondy"), getStationId("Bondy"), 0, 2, 0);
+    addEdgePair(getStationId("Chatillon Montrouge"),
+                getStationId("Chatillon - Montrouge"), 0, 2, 0);*/
 
-    /* addEdgePair(getStationId("Anvers"), getStationId("Funiculaire Gare
-     basse"), 0, 5, 0); addEdgePair(getStationId("Villejuif - Louis
-     Aragon"), getStationId("Villejuif-Louis Aragon"), 0, 1.5, 0);
-     addEdgePair(getStationId("Gare de Bondy"), getStationId("Bondy"), 0, 2,
-     0); addEdgePair(getStationId("Chatillon Montrouge"),
-                 getStationId("Chatillon - Montrouge"), 0, 2, 0);*/
+    l << "Fix station with correspondance but different name\n";
+
+    addEdgePair(getStationId("Magenta"), getStationId("Gare du Nord"), 0, 5, 0);
+    /*addEdgePair(getStationId("Saint-Michel"),
+                getStationId("Saint-Michel Notre-Dame"), 0, 5, 0);
+    addEdgePair(getStationId("Anvers"), getStationId("Funiculaire Gare basse"),
+                0, 5, 0);
+*/
+
     l << "Fix line with junction\n";
     // RER A
     addEdgePair(getStationId("Vincennes"), getStationId("Fontenay-sous-Bois"),
@@ -273,10 +395,10 @@ void Graph::correctFailure()
 
     addEdgePair(getStationId("Les Saules"), getStationId("Choisy-le-Roi"),
                 getLineId("rers", "C"), getTypeDuration("rers"), 0);
-    removeEdgePair(getStationId("Petit Vaux"), getStationId("Massy-Verrières"),
+    removeEdgePair(getStationId("Petit Vaux"), getStationId("Massy-Verrieres"),
                    getLineId("rers", "C"));
 
-    addEdgePair(getStationId("Massy-Verrières"),
+    addEdgePair(getStationId("Massy-Verrieres"),
                 getStationId("Massy-Palaiseau"), getLineId("rers", "C"),
                 getTypeDuration("rers"), 0);
 
@@ -291,8 +413,13 @@ void Graph::correctFailure()
                 getStationId("Viroflay-Rive-Gauche"), getLineId("rers", "C"),
                 getTypeDuration("rers"), 0);
     removeEdgePair(getStationId("Javel"),
-                   getStationId("Versailles-Château-Rive-Gauche"),
+                   getStationId("Versailles-Chateau-Rive-Gauche"),
                    getLineId("rers", "C"));
+
+    addEdgePair(getStationId("Bretigny"), getStationId("Marolles-en-Hurepoix"),
+                getLineId("rers", "C"), getTypeDuration("rers"), 0);
+    removeEdgePair(getStationId("Marolles-en-Hurepoix"),
+                   getStationId("Dourdan - La Foret"), getLineId("rers", "C"));
 
     // RER D
     addEdgePair(getStationId("Villeneuve-Saint-Georges"),
@@ -352,8 +479,13 @@ Graph::Graph()
     // initStations(lines_csv, "bus");
 
     addStationsPosition();
+    addStationCity();
     addStationsPopulation();
     addStationsEmployment();
+    sharePopEmp();
+
+    total_population_ = getTotalPopulation();
+    total_employment_ = getTotalEmployment();
 
     correctFailure();
 }

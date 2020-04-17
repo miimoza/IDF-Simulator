@@ -1,0 +1,103 @@
+{
+    "result": {
+        "stations": [
+            {
+                "slug": "boulogne+pont+de+saint+cloud",
+                "name": "Boulogne Pont de Saint-Cloud"
+            },
+            {
+                "slug": "boulogne+jean+jaures",
+                "name": "Boulogne-Jean-Jaures"
+            },
+            {
+                "slug": "porte+d'auteuil",
+                "name": "Porte d'Auteuil"
+            },
+            {
+                "slug": "michel+ange+molitor",
+                "name": "Michel-Ange-Molitor"
+            },
+            {
+                "slug": "chardon+lagache",
+                "name": "Chardon-Lagache"
+            },
+            {
+                "slug": "mirabeau",
+                "name": "Mirabeau"
+            },
+            {
+                "slug": "javel+andre+citroen",
+                "name": "Javel-Andre-Citroen"
+            },
+            {
+                "slug": "charles+michels",
+                "name": "Charles Michels"
+            },
+            {
+                "slug": "avenue+emile+zola",
+                "name": "Avenue Emile-Zola"
+            },
+            {
+                "slug": "la+motte+picquet+grenelle",
+                "name": "La Motte-Picquet-Grenelle"
+            },
+            {
+                "slug": "segur",
+                "name": "Segur"
+            },
+            {
+                "slug": "duroc",
+                "name": "Duroc"
+            },
+            {
+                "slug": "vaneau",
+                "name": "Vaneau"
+            },
+            {
+                "slug": "sevres+babylone",
+                "name": "Sevres-Babylone"
+            },
+            {
+                "slug": "mabillon",
+                "name": "Mabillon"
+            },
+            {
+                "slug": "odeon",
+                "name": "Odeon"
+            },
+            {
+                "slug": "cluny+la+sorbonne",
+                "name": "Cluny-La Sorbonne"
+            },
+            {
+                "slug": "maubert+mutualite",
+                "name": "Maubert-Mutualite"
+            },
+            {
+                "slug": "cardinal+lemoine",
+                "name": "Cardinal-Lemoine"
+            },
+            {
+                "slug": "jussieu",
+                "name": "Jussieu"
+            },
+            {
+                "slug": "gare+d'austerlitz",
+                "name": "Gare d'Austerlitz"
+            },
+            {
+                "slug": "eglise+d'auteuil",
+                "name": "Eglise d'Auteuil"
+            },
+            {
+                "slug": "michel+ange+auteuil",
+                "name": "Michel-Ange-Auteuil"
+            }
+        ]
+    },
+    "_metadata": {
+        "call": "GET /stations/metros/10",
+        "date": "2020-04-12T19:41:44+02:00",
+        "version": 3
+    }
+}

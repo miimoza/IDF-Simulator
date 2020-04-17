@@ -1,0 +1,127 @@
+{
+    "result": {
+        "stations": [
+            {
+                "slug": "mairie+d'issy",
+                "name": "Mairie d'Issy"
+            },
+            {
+                "slug": "corentin+celton",
+                "name": "Corentin-Celton"
+            },
+            {
+                "slug": "porte+de+versailles",
+                "name": "Porte de Versailles"
+            },
+            {
+                "slug": "convention",
+                "name": "Convention"
+            },
+            {
+                "slug": "vaugirard+(adolphe+cherioux)",
+                "name": "Vaugirard (Adolphe Cherioux)"
+            },
+            {
+                "slug": "volontaires",
+                "name": "Volontaires"
+            },
+            {
+                "slug": "pasteur",
+                "name": "Pasteur"
+            },
+            {
+                "slug": "falguiere",
+                "name": "Falguiere"
+            },
+            {
+                "slug": "montparnasse+bienvenue",
+                "name": "Montparnasse-Bienvenue"
+            },
+            {
+                "slug": "notre+dame+des+champs",
+                "name": "Notre-Dame des Champs"
+            },
+            {
+                "slug": "rennes",
+                "name": "Rennes"
+            },
+            {
+                "slug": "sevres+babylone",
+                "name": "Sevres-Babylone"
+            },
+            {
+                "slug": "rue+du+bac",
+                "name": "Rue du Bac"
+            },
+            {
+                "slug": "solferino",
+                "name": "Solferino"
+            },
+            {
+                "slug": "assemblee+nationale",
+                "name": "Assemblee Nationale"
+            },
+            {
+                "slug": "concorde",
+                "name": "Concorde"
+            },
+            {
+                "slug": "madeleine",
+                "name": "Madeleine"
+            },
+            {
+                "slug": "saint+lazare",
+                "name": "Saint-Lazare"
+            },
+            {
+                "slug": "trinite+d'estienne+d'orves",
+                "name": "Trinite-d'Estienne d'Orves"
+            },
+            {
+                "slug": "notre+dame+de+lorette",
+                "name": "Notre-Dame de Lorette"
+            },
+            {
+                "slug": "saint+georges",
+                "name": "Saint-Georges"
+            },
+            {
+                "slug": "pigalle",
+                "name": "Pigalle"
+            },
+            {
+                "slug": "abbesses",
+                "name": "Abbesses"
+            },
+            {
+                "slug": "lamarck+caulaincourt",
+                "name": "Lamarck-Caulaincourt"
+            },
+            {
+                "slug": "jules+joffrin",
+                "name": "Jules Joffrin"
+            },
+            {
+                "slug": "marcadet+poissonniers",
+                "name": "Marcadet-Poissonniers"
+            },
+            {
+                "slug": "marx+dormoy",
+                "name": "Marx-Dormoy"
+            },
+            {
+                "slug": "porte+de+la+chapelle",
+                "name": "Porte de la Chapelle"
+            },
+            {
+                "slug": "front+populaire",
+                "name": "Front Populaire"
+            }
+        ]
+    },
+    "_metadata": {
+        "call": "GET /stations/metros/12",
+        "date": "2020-04-12T19:41:45+02:00",
+        "version": 3
+    }
+}

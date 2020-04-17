@@ -29,11 +29,11 @@ void Graph::browsePath(std::vector<std::pair<int, int>> best_parent, int src_id,
         if (Graph::HPM)
         {
             traffic = stations_data[src_id].population
-                * (stations_data[dst_id].employment / TOTAL_EMPLOYMENT);
+                * (stations_data[dst_id].employment / total_employment_);
         } else
         {
             traffic = stations_data[src_id].employment
-                * (stations_data[dst_id].population / TOTAL_POPULATION);
+                * (stations_data[dst_id].population / total_population_);
         }
 
         adj_list[best_parent[i].first][index].traffic += traffic;

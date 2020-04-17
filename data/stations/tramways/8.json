@@ -1,0 +1,63 @@
+{
+    "result": {
+        "stations": [
+            {
+                "slug": "saint+denis+++porte+de+paris",
+                "name": "Saint-Denis - Porte de Paris"
+            },
+            {
+                "slug": "pierre+de+geyter",
+                "name": "Pierre de Geyter"
+            },
+            {
+                "slug": "saint+denis+++gare",
+                "name": "Saint-Denis - Gare"
+            },
+            {
+                "slug": "paul+eluard",
+                "name": "Paul Eluard"
+            },
+            {
+                "slug": "delaunay+belleville",
+                "name": "Delaunay-Belleville"
+            },
+            {
+                "slug": "blumenthal",
+                "name": "Blumenthal"
+            },
+            {
+                "slug": "les+mobiles",
+                "name": "Les Mobiles"
+            },
+            {
+                "slug": "les+beatus",
+                "name": "Les Beatus"
+            },
+            {
+                "slug": "rose+bertin+(centre+commercial+l'ilo)",
+                "name": "Rose Bertin (Centre Commercial l'Ilo)"
+            },
+            {
+                "slug": "lacepede",
+                "name": "Lacepede"
+            },
+            {
+                "slug": "gilbert+bonnemaison",
+                "name": "Gilbert Bonnemaison"
+            },
+            {
+                "slug": "epinay+sur+seine+++gare",
+                "name": "Epinay-Sur-Seine - Gare"
+            },
+            {
+                "slug": "epinay+++orgemont",
+                "name": "Epinay - Orgemont"
+            }
+        ]
+    },
+    "_metadata": {
+        "call": "GET /stations/tramways/8",
+        "date": "2020-04-12T19:42:04+02:00",
+        "version": 3
+    }
+}

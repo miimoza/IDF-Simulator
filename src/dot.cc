@@ -1,4 +1,5 @@
 #include <fstream>
+#include <iomanip>
 
 #include "graph.hh"
 #include "log.hh"
@@ -34,8 +35,9 @@ void Graph::generateDot(std::string filename)
         for (Edge edge : adj_list[i])
         {
             std::string edge_color = lines_data[edge.line_id].color;
-            os << i << "->" << edge.dst_id << "[penwidth=" << 3 << ",color=\""
-               << edge_color << "\", label=\""
+            os << std::fixed << std::setprecision(2) << i << "->" << edge.dst_id
+               << "[penwidth=" << 3 + (edge.traffic * 50 / total_population_)
+               << ",color=\"" << edge_color << "\", label=\""
                << "d:" << edge.duration << " t:" << edge.traffic << "\"];\n";
         }
     }

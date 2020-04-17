@@ -1,0 +1,27 @@
+{
+    "result": {
+        "stations": [
+            {
+                "slug": "porte+des+lilas",
+                "name": "Porte des Lilas"
+            },
+            {
+                "slug": "saint+fargeau",
+                "name": "Saint-Fargeau"
+            },
+            {
+                "slug": "pelleport",
+                "name": "Pelleport"
+            },
+            {
+                "slug": "gambetta",
+                "name": "Gambetta"
+            }
+        ]
+    },
+    "_metadata": {
+        "call": "GET /stations/metros/3b",
+        "date": "2020-04-12T19:41:40+02:00",
+        "version": 3
+    }
+}

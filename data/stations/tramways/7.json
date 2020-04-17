@@ -1,0 +1,83 @@
+{
+    "result": {
+        "stations": [
+            {
+                "slug": "porte+de+l'essonne",
+                "name": "Porte de l'Essonne"
+            },
+            {
+                "slug": "aeroport+d'orly",
+                "name": "Aeroport d'Orly"
+            },
+            {
+                "slug": "coeur+d'orly",
+                "name": "Coeur d'Orly"
+            },
+            {
+                "slug": "caroline+aigle+(orlyfret)",
+                "name": "Caroline Aigle (Orlyfret)"
+            },
+            {
+                "slug": "helene+boucher+(orlytech)",
+                "name": "Helene Boucher (Orlytech)"
+            },
+            {
+                "slug": "la+fraternelle",
+                "name": "La Fraternelle"
+            },
+            {
+                "slug": "robert+schuman+(parc+silic+centre)",
+                "name": "Robert Schuman (Parc Silic Centre)"
+            },
+            {
+                "slug": "saarinen+(parc+silic+nord)",
+                "name": "Saarinen (Parc Silic Nord)"
+            },
+            {
+                "slug": "porte+de+rungis",
+                "name": "Porte de Rungis"
+            },
+            {
+                "slug": "place+de+la+logistique+(plateforme+sogaris)",
+                "name": "Place de la Logistique (Plateforme Sogaris)"
+            },
+            {
+                "slug": "la+belle+epine",
+                "name": "La Belle Epine"
+            },
+            {
+                "slug": "porte+de+thiais+(marche+international)",
+                "name": "Porte de Thiais (Marche International)"
+            },
+            {
+                "slug": "auguste+perret+(cimetiere+parisien)",
+                "name": "Auguste Perret (Cimetiere Parisien)"
+            },
+            {
+                "slug": "bretagne",
+                "name": "Bretagne"
+            },
+            {
+                "slug": "moulin+vert",
+                "name": "Moulin Vert"
+            },
+            {
+                "slug": "domaine+cherioux",
+                "name": "Domaine Cherioux"
+            },
+            {
+                "slug": "lamartine",
+                "name": "Lamartine"
+            },
+            {
+                "slug": "villejuif+++louis+aragon",
+                "name": "Villejuif - Louis Aragon"
+            }
+        ]
+    },
+    "_metadata": {
+        "call": "GET /stations/tramways/7",
+        "date": "2020-04-12T19:42:03+02:00",
+        "version": 3
+    }
+}

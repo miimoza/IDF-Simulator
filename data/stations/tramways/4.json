@@ -1,0 +1,67 @@
+{
+    "result": {
+        "stations": [
+            {
+                "slug": "arboretum",
+                "name": "Arboretum"
+            },
+            {
+                "slug": "notre+dame+des+anges",
+                "name": "Notre-Dame-Des-Anges"
+            },
+            {
+                "slug": "clichy+montfermeil",
+                "name": "Clichy-Montfermeil"
+            },
+            {
+                "slug": "romain+rolland",
+                "name": "Romain Rolland"
+            },
+            {
+                "slug": "clichy+sous+bois+++mairie",
+                "name": "Clichy-Sous-Bois - Mairie"
+            },
+            {
+                "slug": "maurice+audin",
+                "name": "Maurice Audin"
+            },
+            {
+                "slug": "leon+blum",
+                "name": "Leon Blum"
+            },
+            {
+                "slug": "republique+++marx+dormoy",
+                "name": "Republique - Marx Dormoy"
+            },
+            {
+                "slug": "gare+de+gargan",
+                "name": "Gare de Gargan"
+            },
+            {
+                "slug": "gare+des+pavillons+sous+bois",
+                "name": "Gare des Pavillons Sous Bois"
+            },
+            {
+                "slug": "gare+d'allee+de+la+tour+rendez+vous",
+                "name": "Gare d'Allee de la Tour Rendez Vous"
+            },
+            {
+                "slug": "gare+des+coquetiers",
+                "name": "Gare des Coquetiers"
+            },
+            {
+                "slug": "la+remise+a+jorelle",
+                "name": "La Remise a Jorelle"
+            },
+            {
+                "slug": "gare+de+bondy",
+                "name": "Gare de Bondy"
+            }
+        ]
+    },
+    "_metadata": {
+        "call": "GET /stations/tramways/4",
+        "date": "2020-04-12T19:42:04+02:00",
+        "version": 3
+    }
+}
